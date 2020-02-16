@@ -1,16 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { StateProvider } from './store.js';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
+import newContext from './store.js'
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 
+
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
+    <BrowserRouter basename={baseUrl}>
+        <App />
   </BrowserRouter>,
   rootElement);
 

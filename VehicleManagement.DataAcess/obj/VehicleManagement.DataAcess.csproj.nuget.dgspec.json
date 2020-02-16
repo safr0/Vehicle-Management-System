@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Code\\Practice DotNet\\Aspnetcore\\To Upload\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj": {}
+    "E:\\Code\\Projects\\Vehicle-Management-System\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj": {}
   },
   "projects": {
-    "E:\\Code\\Practice DotNet\\Aspnetcore\\To Upload\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj": {
+    "E:\\Code\\Projects\\Vehicle-Management-System\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Code\\Practice DotNet\\Aspnetcore\\To Upload\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj",
+        "projectUniqueName": "E:\\Code\\Projects\\Vehicle-Management-System\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj",
         "projectName": "VehicleManagement.DataAcess",
-        "projectPath": "E:\\Code\\Practice DotNet\\Aspnetcore\\To Upload\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj",
+        "projectPath": "E:\\Code\\Projects\\Vehicle-Management-System\\VehicleManagement.DataAcess\\VehicleManagement.DataAcess.csproj",
         "packagesPath": "C:\\Users\\sheikH\\.nuget\\packages\\",
-        "outputPath": "E:\\Code\\Practice DotNet\\Aspnetcore\\To Upload\\VehicleManagement.DataAcess\\obj\\",
+        "outputPath": "E:\\Code\\Projects\\Vehicle-Management-System\\VehicleManagement.DataAcess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
