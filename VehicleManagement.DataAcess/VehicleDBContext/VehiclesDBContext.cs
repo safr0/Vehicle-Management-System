@@ -14,6 +14,8 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
         }
 
         public DbSet<Car> Cars { get; set; }
+        
+        public DbSet<VehicleSpecification> Specs { get; set; }        
         //todo boats
     }
 }

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagement", "Vehicl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagement.DataAcess", "VehicleManagement.DataAcess\VehicleManagement.DataAcess.csproj", "{C51F9DC2-F053-45FD-94A4-E0E1EDD52E56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleManagement.Tests", "VehicleManagement.Tests\VehicleManagement.Tests.csproj", "{9E65EA40-9826-414B-B464-B8B4332A1759}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C51F9DC2-F053-45FD-94A4-E0E1EDD52E56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C51F9DC2-F053-45FD-94A4-E0E1EDD52E56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C51F9DC2-F053-45FD-94A4-E0E1EDD52E56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E65EA40-9826-414B-B464-B8B4332A1759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E65EA40-9826-414B-B464-B8B4332A1759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E65EA40-9826-414B-B464-B8B4332A1759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E65EA40-9826-414B-B464-B8B4332A1759}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

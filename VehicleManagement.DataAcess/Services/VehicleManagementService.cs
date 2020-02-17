@@ -23,13 +23,7 @@ namespace VehicleManagement.Domain.Services
             await _context.Cars.AddAsync(car);
             return car;
         }
-
-        public async Task DeleteCar(Car car)
-        {
-            _context.Cars.Remove(car);
-            await _context.SaveChangesAsync();
-        }
-
+        
         public async Task<Car> GetCarById(int carId)
         {
             return await _context.Cars.FindAsync(carId);
@@ -40,7 +34,8 @@ namespace VehicleManagement.Domain.Services
             return _context.Cars.AsQueryable().ToList();
         }
 
-        public async Task<bool> UpdateCarBy(Car car)
+        
+        public async Task<bool> UpdateCarAsync(Car car)
         {
             var dbCar = _context.Cars.Find(car.ID);
             if(dbCar != null)
@@ -51,12 +46,19 @@ namespace VehicleManagement.Domain.Services
                 dbCar.Seats = car.Seats;
                 dbCar.VinNumber = car.VinNumber;
                 
-                dbCar.Specs = car.Specs;
+                //dbCar.Specs = car.Specs;
 
                 await _context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
+
+        public async Task DeleteCar(Car car)
+        {
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

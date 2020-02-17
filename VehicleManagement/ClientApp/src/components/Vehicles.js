@@ -5,36 +5,31 @@ import { store } from '../store';
 const vehicleList = [
 
     {
-
         ID : 1,
         Title : "Audi 80",
         Make : "Audi",
         Model : "80",
         Seats : 5,
         VinNumber : "VIN1234567",
-        SpecificationId : 1,
+        SpecificationId: 1,
+        Engine: "V8",
         Doors : 4,
         BodyType : "Sedan"
-
-
     },
 
     {
-
         ID: 2,
         Title: "Audi 2",
-        Make: "Audi2",
+        Make: "Audi",
         Model: "80",
         Seats: 5,
         VinNumber: "VIN1234567",
         SpecificationId: 1,
         Doors: 4,
-        BodyType: "Sedan"
-
-
+        BodyType: "Sedan",
+        Engine: "V6",
     },
     {
-
         ID: 3,
         Title: "Audi 808",
         Make: "Audi",
@@ -43,30 +38,33 @@ const vehicleList = [
         VinNumber: "VIN1234567",
         SpecificationId: 1,
         Doors: 4,
-        BodyType: "Sedan"
-
-
+        BodyType: "Sedan",
+        Engine: "3.6 lit",
     },
-
     {
-
         ID: 4,
         Title: "Audi 202",
-        Make: "Audi2",
+        Make: "Audi",
         Model: "80",
         Seats: 5,
         VinNumber: "VIN1234567",
         SpecificationId: 1,
         Doors: 4,
-        BodyType: "Sedan"
-
-
+        BodyType: "Sedan",
+        Engine: "3.6 lit",
     }
-
 ];
-export default function Vehicles(){
 
 
+//async GetCarList() {
+//    const response = await fetch('vehiclemanagement/GetCars');
+//    const data = await response.json();
+//    this.setState({ carlist: data, loading: false });
+//}
+
+
+export default function Vehicles() {
+  
 
 
   //constructor(props) {
@@ -76,7 +74,8 @@ export default function Vehicles(){
     //const context = useContext(store);
     //console.log('context value', context);
     const [vehicles, setVehicles] = useState([]);
-    const [isLoading, setisLLoading] = useState(true);
+    const [isLoading, setisLLoading] = useState(true);    
+
     const history = useHistory();
     //componentWillMount() {
 
@@ -87,33 +86,38 @@ export default function Vehicles(){
         
     //}
     useEffect(() => {
-        setTimeout(() => {
-            setVehicles(vehicleList);
+        
+            //setVehicles(vehicleList);            
+            fetch("vehiclemanagement")
+                .then(response => response.json())
+                .then(data => setVehicles(data));
+
             setisLLoading(false);
-        }, 3000);
+
+      
     }, []);
     const createCar = () => {
 
         history.push('/createCar');
     }
+    const editCar = (id) => {
+        history.push('/editCar/'+id);
+    }
 
-        const loading = <div>fetching vehicles <Icon loading size="massive" name='spinner' /> </div>
+    const loading = <div>fetching vehicles <Icon loading size="massive" name='spinner' /> </div>
      
-    const vehicleArray = vehicleList.map(function (c, index) {
-        return <List key={c.ID} divided relaxed>
-            <List.Item key={c.ID}>
+    const vehicleArray = vehicles.map(function (c, index) {
+        return <List key={c.id} divided relaxed>
+            <List.Item key={c.id}>
                     <List.Icon name='bus' size='large' verticalAlign='middle' />
-                    <List.Content>
-                        <List.Header as='a'>{c.Title}</List.Header>
-                        <List.Description as='a'>{c.Make} | having {c.Doors} Doors </List.Description>
+                <List.Content>
+                    <List.Header as='a' onClick={() => { editCar(c.id) }}>{c.title}</List.Header>
+                    <List.Description as='a'>Manufactured by {c.make} | having {c.doors} Doors | with {c.engine} Engine and spacious {c.seats} seats for a family car</List.Description>
                     </List.Content>
                 </List.Item>
             </List>;
         }); 
-
-            
-
-
+    
     return (
         <div>
 

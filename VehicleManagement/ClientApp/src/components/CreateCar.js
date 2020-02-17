@@ -3,9 +3,6 @@ import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 const CreateCar = () => {
 
-    
-
-
     const addCar = (event, v, b) => {
         event.preventDefault();
         console.log(event.target.elements.Title.value) // from elements property

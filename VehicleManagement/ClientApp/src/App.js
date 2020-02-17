@@ -6,6 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import Vehicles  from './components/Vehicles';
 import CreateCar from './components/CreateCar';
+import EditCar from './components/editCar';
 import './custom.css'
 
 export default class App extends Component {
@@ -19,6 +20,7 @@ export default class App extends Component {
             <Route path='/fetch-data' component={FetchData} />
             <Route path='/vehicles' component={Vehicles} />
             <Route path='/createCar' component={CreateCar} />
+            <Route path='/editCar/:id' component={EditCar} />
 
         </Layout>
     );

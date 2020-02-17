@@ -31,6 +31,7 @@ namespace VehicleManagement.DataAcess.Entities
     public class CarSpecification : VehicleSpecification
     {
         public int Doors { get; set; }
+        public String Engine { get; set; }
         public BodyType BodyType { get; set; }
         new VehicleType VehicleType = VehicleType.Car;
     }

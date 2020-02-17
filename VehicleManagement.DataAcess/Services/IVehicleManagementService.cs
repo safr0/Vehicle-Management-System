@@ -9,6 +9,7 @@ namespace VehicleManagement.Domain.Services
         Task<Car> GetCarById(int carId);
         List<Car> GetCars();
         Task<Car> AddCarAsync(Car car);
+        Task<bool> UpdateCarAsync(Car car);
         Task DeleteCar(Car car);
     }
 }
