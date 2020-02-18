@@ -13,12 +13,12 @@ namespace VehicleManagement.Controllers
     [ApiController]
     [Route("[controller]")]
     public class VehicleManagementController : ControllerBase
-    {        
+    {
         private readonly ILogger<VehicleManagementController> _logger;
 
         private readonly IVehicleManagementService _vehicleService;
 
-        public VehicleManagementController(ILogger<VehicleManagementController> logger,IVehicleManagementService vehicleService)
+        public VehicleManagementController(ILogger<VehicleManagementController> logger, IVehicleManagementService vehicleService)
         {
             _logger = logger;
             _vehicleService = vehicleService;
@@ -32,7 +32,7 @@ namespace VehicleManagement.Controllers
             {
                 await _vehicleService.AddCarAsync(new Car()
                 {
-                    Title = car.Title,                    
+                    Title = car.Title,
                     Make = car.Make,
                     Model = car.Model,
                     Seats = car.Seats,
@@ -60,13 +60,22 @@ namespace VehicleManagement.Controllers
         {
             try
             {
-                await _vehicleService.UpdateCarAsync(new Car() { Title = car.Title, ID = car.ID, Make = car.Make, 
-                                                                 Model = car.Model, Seats = car.Seats, VinNumber = car.VinNumber,
-                                                                 
-                                                                 Specs = new CarSpecification() { Doors = car.Doors, 
-                                                                                                  BodyType=(BodyType)car.BodyType, Engine=car.Engine, 
-                                                                 }
-                                                    });                
+                await _vehicleService.UpdateCarAsync(new Car()
+                {
+                    Title = car.Title,
+                    ID = car.ID,
+                    Make = car.Make,
+                    Model = car.Model,
+                    Seats = car.Seats,
+                    VinNumber = car.VinNumber,
+
+                    Specs = new CarSpecification()
+                    {
+                        Doors = car.Doors,
+                        BodyType = (BodyType)car.BodyType,
+                        Engine = car.Engine,
+                    }
+                });
             }
             catch (Exception exception)
             {
@@ -76,7 +85,7 @@ namespace VehicleManagement.Controllers
             return true;
         }
 
-        [HttpGet]        
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<VehicleManagementModel>>> GetVehicles()
         {
@@ -89,12 +98,12 @@ namespace VehicleManagement.Controllers
                     ID = car.ID,
                     Title = car.Title,
                     Make = car.Make,
-                    Model = car.Model,                    
+                    Model = car.Model,
                     Seats = car.Seats,
                     VinNumber = car.VinNumber,
-                    
-                    SpecificationId = car.Specs.SpecificationId,                    
-                    Engine = car.Specs.Engine,                
+
+                    SpecificationId = car.Specs.SpecificationId,
+                    Engine = car.Specs.Engine,
                     Doors = car.Specs.Doors,
                     BodyType = (int)car.Specs.BodyType
                 }).ToArray();
@@ -104,24 +113,25 @@ namespace VehicleManagement.Controllers
             catch (Exception exception)
             {
                 _logger.LogCritical(exception, exception.Message);
-               return NoContent();                
-            }            
+                return NoContent();
+            }
         }
 
-        [HttpGet("{id}")]        
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]        
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<VehicleManagementModel>> GetVehicle(int id)
         {
             var _carModel = new VehicleManagementModel();
 
             var car = await _vehicleService.GetCarById(id);
-            
+
             if (car == null)
             {
-                return NotFound();             
+                return NotFound();
             }
 
-            if (car!=null){
+            if (car != null)
+            {
                 _carModel.ID = car.ID;
                 _carModel.Title = car.Title;
                 _carModel.Make = car.Make;
@@ -129,13 +139,13 @@ namespace VehicleManagement.Controllers
                 _carModel.Seats = car.Seats;
                 _carModel.VinNumber = car.VinNumber;
 
-                if (car.Specs!=null)
+                if (car.Specs != null)
                 {
                     _carModel.SpecificationId = car.Specs.SpecificationId;
                     _carModel.Engine = car.Specs.Engine;
                     _carModel.Doors = car.Specs.Doors;
                     _carModel.BodyType = (int)car.Specs.BodyType;
-                }                
+                }
             }
 
             return CreatedAtAction("GetVehicle", _carModel);
