@@ -24,6 +24,7 @@ namespace VehicleManagement
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddTransient<IVehicleManagementService, VehicleManagementService>();
 

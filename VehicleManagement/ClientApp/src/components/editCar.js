@@ -45,39 +45,36 @@ const EditCar = () => {
         <Form onSubmit={editCar} >
             <Form.Field>
                 <label>Title</label>
-                <input name="title" value={vehicle.title} onChange={updateForm} placeholder='Title' />
+                <input required name="title" value={vehicle.title} onChange={updateForm} placeholder='Title' />
             </Form.Field>
             <Form.Field>
                 <label>Make</label>
-                <input name="make" value={vehicle.make} onChange={updateForm}   placeholder='Make' />
+                <input required name="make" value={vehicle.make} onChange={updateForm}   placeholder='Make' />
             </Form.Field>
             <Form.Field>
                 <label>Model</label>
-                <input name="model" value={vehicle.model} onChange={updateForm}   placeholder='Model' />
+                <input  required name="model" value={vehicle.model} onChange={updateForm}   placeholder='Model' />
             </Form.Field>
 
             <Form.Field>
                 <label>Seats</label>
-                <input name="seats" value={vehicle.seats} onChange={updateForm}   placeholder='seats' />
+                <input max="24" min="1" type="number" name="seats" value={vehicle.seats} onChange={updateForm}   placeholder='seats' />
             </Form.Field>
 
             <Form.Field>
                 <label>VINNumber</label>
-                <input name="vinNumber" value={vehicle.vinNumber} onChange={updateForm}   placeholder='Model' />
+                <input required name="vinNumber" value={vehicle.vinNumber} onChange={updateForm}   placeholder='Model' />
             </Form.Field>
 
             <Form.Field>
                 <label>Engine</label>
-                <input name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Model' />
+                <input required name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Model' />
             </Form.Field>
             <Form.Field>
                 <label>Doors</label>
-                <input name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Model' />
+                <input required type="number" max="10" min="1"  name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Model' />
             </Form.Field>
-            <Form.Field>
-                <label>Body Type</label>
-                <input name="bodyType" value={vehicle.bodyType} onChange={updateForm} placeholder='Model' />
-            </Form.Field>
+     
 
 
             <Button  type='submit'>Submit</Button>
