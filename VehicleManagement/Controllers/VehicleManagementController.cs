@@ -13,16 +13,10 @@ namespace VehicleManagement.Controllers
     [ApiController]
     [Route("[controller]")]
     public class VehicleManagementController : ControllerBase
-    {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+    {        
         private readonly ILogger<VehicleManagementController> _logger;
 
         private readonly IVehicleManagementService _vehicleService;
-
 
         public VehicleManagementController(ILogger<VehicleManagementController> logger,IVehicleManagementService vehicleService)
         {
@@ -30,66 +24,121 @@ namespace VehicleManagement.Controllers
             _vehicleService = vehicleService;
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<VehicleManagementVM>> Get()
-        //{
-
-        //    var tep = await _vehicleService.GetCarById(2);
-
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new VehicleManagementVM
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
-
-        [HttpPut("{id}")]
-        public async Task<bool> PutVehicle(int id, VehicleManagementModel car)
+        [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> PostVehicle(VehicleManagementModel car)
         {
-           await  _vehicleService.UpdateCarAsync(new Car() {Title= car.Title, ID = car.ID, Make = car.Make, Model = car.Model, Seats = car.Seats, VinNumber = car.VinNumber });
+            try
+            {
+                await _vehicleService.AddCarAsync(new Car()
+                {
+                    Title = car.Title,                    
+                    Make = car.Make,
+                    Model = car.Model,
+                    Seats = car.Seats,
+                    VinNumber = car.VinNumber,
+
+                    Specs = new CarSpecification()
+                    {
+                        Doors = car.Doors,
+                        BodyType = (BodyType)car.BodyType,
+                        Engine = car.Engine,
+                    }
+                });
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(exception, exception.Message);
+                return BadRequest();
+            }
             return true;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<VehicleManagementModel>> GetVehicles()
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<bool>> PutVehicle(int id, VehicleManagementModel car)
         {
-            var carList = _vehicleService.GetCars();         
-
-            return carList.Select(car => new VehicleManagement.VehicleManagementModel
+            try
             {
-                ID = car.ID,
-                Title = car.Title,
-                Make = car.Make,
-                Model = car.Model,
-                //Engine = ((CarSpecification)car.Specs).Engine,
-                Seats = car.Seats,
-                VinNumber = car.VinNumber,
-                //SpecificationId =car.Specs.SpecificationId,
-                //Doors = ((CarSpecification)car.Specs).Doors,
-                //BodyType = (int)((CarSpecification)car.Specs).BodyType
-            })
-            .ToArray();
+                await _vehicleService.UpdateCarAsync(new Car() { Title = car.Title, ID = car.ID, Make = car.Make, 
+                                                                 Model = car.Model, Seats = car.Seats, VinNumber = car.VinNumber,
+                                                                 
+                                                                 Specs = new CarSpecification() { Doors = car.Doors, 
+                                                                                                  BodyType=(BodyType)car.BodyType, Engine=car.Engine, 
+                                                                 }
+                                                    });                
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(exception, exception.Message);
+                return BadRequest();
+            }
+            return true;
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [HttpGet]        
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<VehicleManagementModel>>> GetVehicles()
+        {
+            try
+            {
+                var carList = _vehicleService.GetCars();
+
+                var carModels = carList.Select(car => new VehicleManagement.VehicleManagementModel
+                {
+                    ID = car.ID,
+                    Title = car.Title,
+                    Make = car.Make,
+                    Model = car.Model,                    
+                    Seats = car.Seats,
+                    VinNumber = car.VinNumber,
+                    
+                    SpecificationId = car.Specs.SpecificationId,                    
+                    Engine = car.Specs.Engine,                
+                    Doors = car.Specs.Doors,
+                    BodyType = (int)car.Specs.BodyType
+                }).ToArray();
+
+                return CreatedAtAction("GetVehicles", carModels);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogCritical(exception, exception.Message);
+               return NoContent();                
+            }            
+        }
+
+        [HttpGet("{id}")]        
         [ProducesResponseType(StatusCodes.Status400BadRequest)]        
         public async Task<ActionResult<VehicleManagementModel>> GetVehicle(int id)
         {
-            var _car = _vehicleService.GetCarById(id);
+            var _carModel = new VehicleManagementModel();
 
-            if (_car == null)
+            var car = await _vehicleService.GetCarById(id);
+            
+            if (car == null)
             {
                 return NotFound();             
             }
 
-            //return _car;
-            return CreatedAtAction("GetVehicle", _car);
+            if (car!=null){
+                _carModel.ID = car.ID;
+                _carModel.Title = car.Title;
+                _carModel.Make = car.Make;
+                _carModel.Model = car.Model;
+                _carModel.Seats = car.Seats;
+                _carModel.VinNumber = car.VinNumber;
 
+                if (car.Specs!=null)
+                {
+                    _carModel.SpecificationId = car.Specs.SpecificationId;
+                    _carModel.Engine = car.Specs.Engine;
+                    _carModel.Doors = car.Specs.Doors;
+                    _carModel.BodyType = (int)car.Specs.BodyType;
+                }                
+            }
+
+            return CreatedAtAction("GetVehicle", _carModel);
         }
-
     }
 }

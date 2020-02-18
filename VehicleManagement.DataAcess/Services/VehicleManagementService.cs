@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using VehicleManagement.DataAcess.VehicleDBContext;
 using VehicleManagement.DataAcess.Entities;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace VehicleManagement.Domain.Services
 {
@@ -25,19 +26,20 @@ namespace VehicleManagement.Domain.Services
         }
         
         public async Task<Car> GetCarById(int carId)
-        {
-            return await _context.Cars.FindAsync(carId);
+        {            
+            return await _context.Cars.Include(v => v.Specs).Where(x=>x.ID== carId).FirstOrDefaultAsync();
         }
 
         public List<Car> GetCars()
-        {
-            return _context.Cars.AsQueryable().ToList();
+        {            
+            return _context.Cars.Include(v => v.Specs).AsQueryable().ToList();
         }
 
         
         public async Task<bool> UpdateCarAsync(Car car)
         {
-            var dbCar = _context.Cars.Find(car.ID);
+            var dbCar = await _context.Cars.Include(v=>v.Specs).Where(v=>v.ID==car.ID).FirstOrDefaultAsync();
+            
             if(dbCar != null)
             {                
                 dbCar.Title = car.Title;
@@ -45,8 +47,13 @@ namespace VehicleManagement.Domain.Services
                 dbCar.Model = car.Model;
                 dbCar.Seats = car.Seats;
                 dbCar.VinNumber = car.VinNumber;
-                
-                //dbCar.Specs = car.Specs;
+
+                if (car.Specs!=null)
+                {
+                    dbCar.Specs.Doors = car.Specs.Doors;
+                    dbCar.Specs.Engine = car.Specs.Engine;
+                    dbCar.Specs.BodyType = car.Specs.BodyType;
+                }
 
                 await _context.SaveChangesAsync();
                 return true;

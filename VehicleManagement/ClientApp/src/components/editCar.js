@@ -6,8 +6,6 @@ import {
     useParams
 } from "react-router-dom";
 
-
-
 const EditCar = () => {
 
     let { id } = useParams();
@@ -17,11 +15,7 @@ const EditCar = () => {
             
             fetch("vehiclemanagement/" + id)
                 .then(response => response.json())
-                .then(data => setVehicle(data.result));
-
-            //setisLLoading(false);
-
-      
+                .then(data => setVehicle(data));      
     }, []);
 
     const editCar = (event) => {
@@ -35,13 +29,13 @@ const EditCar = () => {
             },
             body: JSON.stringify(vehicle),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                history.push('/vehicles');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then((response) => response.json())
+        .then((data) => {
+            history.push('/vehicles');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
     const updateForm= (e) => {
         console.log(e.target.value);
@@ -70,6 +64,19 @@ const EditCar = () => {
             <Form.Field>
                 <label>VINNumber</label>
                 <input name="vinNumber" value={vehicle.vinNumber} onChange={updateForm}   placeholder='Model' />
+            </Form.Field>
+
+            <Form.Field>
+                <label>Engine</label>
+                <input name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Model' />
+            </Form.Field>
+            <Form.Field>
+                <label>Doors</label>
+                <input name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Model' />
+            </Form.Field>
+            <Form.Field>
+                <label>Body Type</label>
+                <input name="bodyType" value={vehicle.bodyType} onChange={updateForm} placeholder='Model' />
             </Form.Field>
 
 

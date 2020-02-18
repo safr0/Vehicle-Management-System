@@ -31,7 +31,8 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "80",
                     Seats = 5,
                     VinNumber = "VIN1234567",
-                    Specs = new CarSpecification() { SpecificationId = 1, Doors = 4, BodyType = BodyType.Sedan },
+                   
+                    Specs = new CarSpecification() { SpecificationId = 1, Doors = 4, BodyType = BodyType.Sedan , Engine="V8" },
                 },
                 new Car
                 {
@@ -41,7 +42,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "90",
                     Seats = 5,
                     VinNumber = "VIN1234517",
-                    Specs = new CarSpecification() { SpecificationId = 2, Doors = 4, BodyType = BodyType.Sedan },
+                    Specs = new CarSpecification() { SpecificationId = 2, Doors = 4, BodyType = BodyType.Sedan, Engine = "V2" },
                 },
                 new Car
                 {
@@ -51,7 +52,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "A1",
                     Seats = 5,
                     VinNumber = "VIN1234527",
-                    Specs = new CarSpecification() { SpecificationId = 3, Doors = 4, BodyType = BodyType.Sedan },
+                    Specs = new CarSpecification() { SpecificationId = 3, Doors = 4, BodyType = BodyType.Sedan, Engine = "2.2" },
                 },
                 new Car
                 {
@@ -61,7 +62,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "1 Series",
                     Seats = 5,
                     VinNumber = "VIN1234537",
-                    Specs = new CarSpecification() { SpecificationId = 4, Doors = 4, BodyType = BodyType.SUV },
+                    Specs = new CarSpecification() { SpecificationId = 4, Doors = 4, BodyType = BodyType.SUV, Engine = "2.0" },
                 },
                 new Car
                 {
@@ -71,7 +72,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "Apollo",
                     Seats = 5,
                     VinNumber = "VIN1234437",
-                    Specs = new CarSpecification() { SpecificationId = 5, Doors = 4, BodyType = BodyType.HatchBack },
+                    Specs = new CarSpecification() { SpecificationId = 5, Doors = 4, BodyType = BodyType.HatchBack, Engine = "2.0" },
                 },
                 new Car
                 {
@@ -81,7 +82,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
                     Model = "Astra",
                     Seats = 5,
                     VinNumber = "VIN1234447",
-                    Specs = new CarSpecification() { SpecificationId = 6, Doors = 4, BodyType = BodyType.HatchBack },
+                    Specs = new CarSpecification() { SpecificationId = 6, Doors = 4, BodyType = BodyType.HatchBack, Engine = "3.0" },
                 });  
 
             context.SaveChanges();
