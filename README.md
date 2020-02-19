@@ -1,24 +1,28 @@
-# VMS
-Vehicle Management System
+# VMS Vehicle Management System
 
-This project is based on two parts. 
-
-One Serer side of the project is based on dotnet core 3.1 latest version and C#. Server side has been built using Asp.net Core Web Project. 
-Server side implements EF Core with In Memory SQL provider imnplementation which very similar to SQL Server backend but you don't have to install it to run this. 
-There are also many other industry standards design considerations and best practices in place for these project which make this project scalable for the Production environment. 
-
-It also contains React ClientApp folder has all the required files for running the React frontend. 
-
-Second part is based on React create application front end. It has been integrated with Asp.net Core Web Project in a very specific way as mention in the requirement doc which enables it to be run either directly from the Visual Studio 2019 ofc F5 or from npm command prompt.
+**Description**
+This project is based on React project template with ASP.NET Core (https://docs.microsoft.com/en-us/aspnet/core/client-side/spa/react?view=aspnetcore-3.1&tabs=visual-studio)
 
 
-# React - Kick start sample 
+***Project execution prerequisites***
+1. netcore SDK 3.1.1 (https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.102-windows-x64-installer)
+2. Node.js (https://nodejs.org/)
+3. Visual Studio 2019 (16.4.5 or later)
 
 
-Please follow the steps to start dev-server which is configured to use port 44393
 
-1. Run npm install 
+## How to run
 
-2. npm start 
+1. As per the requirements, please use Visual Studio and Run the application
+	```1. it will restore the nuget packages and start the aspnet application```
+	```2. it will start reactdevelopmentserver```
+	```3. it will use npm start command to start reactdevelopmentserver```
 
-3. See the results in browser at https://localhost:44393/
+
+## Technology Stack 
+
+1. ASPNET CORE 3.1 (MVC, C#)
+2. React (using create-react-app)
+3. AutoMapper
+4. Entity Framework Core (In memory db)
+5. xUnit Testing framework

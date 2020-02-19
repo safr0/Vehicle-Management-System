@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace VehicleManagement.DataAcess.Entities
@@ -24,6 +25,7 @@ namespace VehicleManagement.DataAcess.Entities
     public class VehicleSpecification
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SpecificationId { get; set; }
         public VehicleType VehicleType { get; }
     }
@@ -33,7 +35,6 @@ namespace VehicleManagement.DataAcess.Entities
         public int Doors { get; set; }
         public String Engine { get; set; }
         public BodyType BodyType { get; set; }
-        new VehicleType VehicleType = VehicleType.Car;
     }
 
     public class BoatSpecification : VehicleSpecification

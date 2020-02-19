@@ -10,7 +10,6 @@ const CreateCar = () => {
         event.preventDefault();
         console.log(vehicle);
 
-
         fetch('vehiclemanagement/', {
             method: 'POST', // or 'PUT'
             headers: {
@@ -50,44 +49,25 @@ const CreateCar = () => {
 
             <Form.Field>
                 <label>Seats</label>
-                <input max="24" min="1" type="number" name="seats" value={vehicle.seats} onChange={updateForm} placeholder='seats' />
+                <input max="24" min="1" type="number" name="seats" value={vehicle.seats} onChange={updateForm} placeholder='Number of Seats' />
             </Form.Field>
 
             <Form.Field>
                 <label>VINNumber</label>
-                <input required name="vinNumber" value={vehicle.vinNumber} onChange={updateForm} placeholder='Model' />
+                <input required name="vinNumber" value={vehicle.vinNumber} onChange={updateForm} placeholder='VINNumber' />
             </Form.Field>
 
             <Form.Field>
                 <label>Engine</label>
-                <input required name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Model' />
+                <input required name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Engine' />
             </Form.Field>
             <Form.Field>
                 <label>Doors</label>
-                <input required type="number" max="10" min="1" name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Model' />
+                <input required type="number" max="10" min="1" name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Number of Doors' />
             </Form.Field>
-
-
-
             <Button type='submit'>Submit</Button>
             <Button onClick={cancelCar}>Cancel</Button>
         </Form>
-        //<Form onSubmit={addCar} >
-        //    <Form.Field>
-        //        <label>Title</label>
-        //        <input name="Title" placeholder='Title' />
-        //    </Form.Field>
-        //    <Form.Field>
-        //        <label>Make</label>
-        //        <input name="Make" placeholder='Make' />
-        //    </Form.Field>
-        //    <Form.Field>
-        //        <label>Model</label>
-        //        <input placeholder='Model' />
-        //    </Form.Field>
-
-        //    <Button  type='submit'>Submit</Button>
-        //</Form>
     );
 }
 

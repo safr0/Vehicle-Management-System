@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using VehicleManagement.DataAcess.Entities;
 using System.Linq;
 
 namespace VehicleManagement.DataAcess.VehicleDBContext
 {
+    /// <summary>
+    /// In memory Database initializer
+    /// </summary>
     public class DataGenerator
     {
-
         public static void Initialize(IServiceProvider serviceProvider)
         {
 
@@ -19,7 +19,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
             
             if (context.Cars.Any())
             {
-                return;   // Database has been seeded
+                return; // Database has been seeded
             }
 
             context.Cars.AddRange(

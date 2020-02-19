@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VehicleManagement.DataAcess.Entities;
 
 namespace VehicleManagement.DataAcess.VehicleDBContext
 {
+    /// <summary>
+    /// Vehicle DBContext
+    /// </summary>
     public class VehiclesDBContext : DbContext
     {
         public VehiclesDBContext(DbContextOptions<VehiclesDBContext> options)
@@ -15,7 +15,7 @@ namespace VehicleManagement.DataAcess.VehicleDBContext
 
         public DbSet<Car> Cars { get; set; }
         
-        public DbSet<VehicleSpecification> Specs { get; set; }        
-        //todo boats
+        public DbSet<VehicleSpecification> Specs { get; set; }
+
     }
 }

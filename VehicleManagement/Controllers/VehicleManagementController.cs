@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,33 +18,23 @@ namespace VehicleManagement.Controllers
 
         private readonly IVehicleManagementService _vehicleService;
 
-        public VehicleManagementController(ILogger<VehicleManagementController> logger, IVehicleManagementService vehicleService)
+        private readonly IMapper _mapper;
+
+        public VehicleManagementController(ILogger<VehicleManagementController> logger, IVehicleManagementService vehicleService, IMapper mapper)
         {
             _logger = logger;
             _vehicleService = vehicleService;
+            _mapper = mapper;
         }
 
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<bool>> PostVehicle(VehicleManagementModel car)
+        public async Task<ActionResult<bool>> PostVehicle(CarViewModel car)
         {
             try
             {
-                await _vehicleService.AddCarAsync(new Car()
-                {
-                    Title = car.Title,
-                    Make = car.Make,
-                    Model = car.Model,
-                    Seats = car.Seats,
-                    VinNumber = car.VinNumber,
-
-                    Specs = new CarSpecification()
-                    {
-                        Doors = car.Doors,
-                        BodyType = (BodyType)car.BodyType,
-                        Engine = car.Engine,
-                    }
-                });
+                var _car = _mapper.Map<Car>(car);
+                await _vehicleService.AddCarAsync(_car);
             }
             catch (Exception exception)
             {
@@ -56,26 +46,12 @@ namespace VehicleManagement.Controllers
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<bool>> PutVehicle(int id, VehicleManagementModel car)
+        public async Task<ActionResult<bool>> PutVehicle(int id, CarViewModel car)
         {
             try
             {
-                await _vehicleService.UpdateCarAsync(new Car()
-                {
-                    Title = car.Title,
-                    ID = car.ID,
-                    Make = car.Make,
-                    Model = car.Model,
-                    Seats = car.Seats,
-                    VinNumber = car.VinNumber,
-
-                    Specs = new CarSpecification()
-                    {
-                        Doors = car.Doors,
-                        BodyType = (BodyType)car.BodyType,
-                        Engine = car.Engine,
-                    }
-                });
+                var _car = _mapper.Map<Car>(car);
+                await _vehicleService.UpdateCarAsync(_car);                
             }
             catch (Exception exception)
             {
@@ -87,28 +63,14 @@ namespace VehicleManagement.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<VehicleManagementModel>>> GetVehicles()
+        public async Task<ActionResult<IEnumerable<CarViewModel>>> Get()
         {
             try
             {
                 var carList = _vehicleService.GetCars();
+                var _carModelList = _mapper.Map<List<CarViewModel>>(carList);                
 
-                var carModels = carList.Select(car => new VehicleManagement.VehicleManagementModel
-                {
-                    ID = car.ID,
-                    Title = car.Title,
-                    Make = car.Make,
-                    Model = car.Model,
-                    Seats = car.Seats,
-                    VinNumber = car.VinNumber,
-
-                    SpecificationId = car.Specs.SpecificationId,
-                    Engine = car.Specs.Engine,
-                    Doors = car.Specs.Doors,
-                    BodyType = (int)car.Specs.BodyType
-                }).ToArray();
-
-                return CreatedAtAction("GetVehicles", carModels);
+                return CreatedAtAction("Get", _carModelList);
             }
             catch (Exception exception)
             {
@@ -119,9 +81,9 @@ namespace VehicleManagement.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<VehicleManagementModel>> GetVehicle(int id)
+        public async Task<ActionResult<CarViewModel>> Get(int id)
         {
-            var _carModel = new VehicleManagementModel();
+            var _carModel = new CarViewModel();
 
             var car = await _vehicleService.GetCarById(id);
 
@@ -131,24 +93,11 @@ namespace VehicleManagement.Controllers
             }
 
             if (car != null)
-            {
-                _carModel.ID = car.ID;
-                _carModel.Title = car.Title;
-                _carModel.Make = car.Make;
-                _carModel.Model = car.Model;
-                _carModel.Seats = car.Seats;
-                _carModel.VinNumber = car.VinNumber;
-
-                if (car.Specs != null)
-                {
-                    _carModel.SpecificationId = car.Specs.SpecificationId;
-                    _carModel.Engine = car.Specs.Engine;
-                    _carModel.Doors = car.Specs.Doors;
-                    _carModel.BodyType = (int)car.Specs.BodyType;
-                }
+            {                
+                _carModel = _mapper.Map<CarViewModel>(car);
             }
 
-            return CreatedAtAction("GetVehicle", _carModel);
+            return CreatedAtAction("Get", _carModel);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VehicleManagement.DataAcess.VehicleDBContext;
 using VehicleManagement.DataAcess.Entities;
@@ -8,20 +7,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VehicleManagement.Domain.Services
 {
+    /// <summary>
+    /// Vehicle service class to Save, Fetch and Modify vehicles 
+    /// </summary>
     public class VehicleManagementService : IVehicleManagementService
     {
-
         private VehiclesDBContext _context;
 
         public VehicleManagementService(VehiclesDBContext context)
         {
             _context = context;            
         }
-        
+
         public async Task<Car> AddCarAsync(Car car)
         {
+            if (car != null)
+            {
+                car.ID = _context.Cars.Any() ? _context.Cars.Select(x => x.ID).Max() + 1 : 1;
 
-            await _context.Cars.AddAsync(car);
+                if (car.Specs != null)
+                {
+                    car.Specs.SpecificationId = _context.Specs.Any() ? _context.Specs.Select(x => x.SpecificationId).Max() + 1 : 1;
+                }
+
+                await _context.Cars.AddAsync(car);
+                _context.SaveChanges();
+            }
+
             return car;
         }
         
@@ -31,7 +43,7 @@ namespace VehicleManagement.Domain.Services
         }
 
         public List<Car> GetCars()
-        {            
+        {
             return _context.Cars.Include(v => v.Specs).AsQueryable().ToList();
         }
 

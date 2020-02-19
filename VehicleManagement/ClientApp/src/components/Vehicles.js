@@ -3,19 +3,7 @@ import { Button, Icon, List, Dropdown, Input } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
 import { store } from '../store';
 
-
-//async GetCarList() {
-//    const response = await fetch('vehiclemanagement/GetCars');
-//    const data = await response.json();
-//    this.setState({ carlist: data, loading: false });
-//}
-
-
 export default function Vehicles() {
-
-
-
-
     const [vehicles, setVehicles] = useState([]);
     const [searchVehicles, setSearchVehicles] = useState([]);
 
@@ -57,19 +45,19 @@ export default function Vehicles() {
     const vehicleArray = searchVehicles.map(function (c, index) {
         return <List key={c.id} divided relaxed>
             <List.Item key={c.id}>
-                    <List.Icon name='car' size='large' verticalAlign='middle' />
+                <List.Icon name='car' size='large' verticalAlign='middle' />
                 <List.Content>
                     <List.Header as='a' onClick={() => { editCar(c.id) }}>{c.title}</List.Header>
                     <List.Description as='a'>Manufactured by {c.make} | having {c.doors} Doors | with {c.engine} Engine and spacious {c.seats} seats for a family car</List.Description>
-                    </List.Content>
-                </List.Item>
-            </List>;
-        }); 
-    
+                </List.Content>
+            </List.Item>
+        </List>;
+    });
+
     return (
         <div >
             <div className="displayInline"><Input className="mrrm" onChange={searchVehicle} icon={{ name: 'search', circular: true, link: true }} placeholder='Search...' />
-</div>
+            </div>
             <Dropdown
                 button
                 className='icon'
@@ -78,12 +66,9 @@ export default function Vehicles() {
                 onChange={createCar}
                 pointing='top left'
                 icon='add'
-                options={[{ key: "Cars", text: "Car", icon: 'car'}]}
-                text='Create'
-            />
-
-            {isLoading ? loading :
-                vehicleArray}
-      </div>
+                options={[{ key: "Cars", text: "Car", icon: 'car' }]}
+                text='Create'/>
+            {isLoading ? loading : vehicleArray}
+        </div>
     );
 }

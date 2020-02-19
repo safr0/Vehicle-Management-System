@@ -2,14 +2,12 @@
 import { Button, Checkbox, Form } from 'semantic-ui-react';
 import { useHistory, useParams } from "react-router-dom";
 
-
 const EditCar = () => {
 
     let { id } = useParams();
     const history = useHistory();
     const [vehicle, setVehicle] = useState({});
     useEffect(() => {
-
         fetch("vehiclemanagement/" + id)
             .then(response => response.json())
             .then(data => setVehicle(data));
@@ -58,25 +56,22 @@ const EditCar = () => {
 
             <Form.Field>
                 <label>Seats</label>
-                <input max="24" min="1" type="number" name="seats" value={vehicle.seats} onChange={updateForm} placeholder='seats' />
+                <input max="24" min="1" type="number" name="seats" value={vehicle.seats} onChange={updateForm} placeholder='Number of Seats' />
             </Form.Field>
 
             <Form.Field>
                 <label>VINNumber</label>
-                <input required name="vinNumber" value={vehicle.vinNumber} onChange={updateForm} placeholder='Model' />
+                <input required name="vinNumber" value={vehicle.vinNumber} onChange={updateForm} placeholder='VINNumber' />
             </Form.Field>
 
             <Form.Field>
                 <label>Engine</label>
-                <input required name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Model' />
+                <input required name="engine" value={vehicle.engine} onChange={updateForm} placeholder='Engine' />
             </Form.Field>
             <Form.Field>
                 <label>Doors</label>
-                <input required type="number" max="10" min="1" name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Model' />
+                <input required type="number" max="10" min="1" name="doors" value={vehicle.doors} onChange={updateForm} placeholder='Number of Doors' />
             </Form.Field>
-
-
-
             <Button className="mrrm" type='submit'>Submit</Button>
             <Button onClick={cancelCar}>Cancel</Button>
         </Form>
