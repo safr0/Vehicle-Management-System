@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagement", "Vehicl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagement.DataAcess", "VehicleManagement.DataAcess\VehicleManagement.DataAcess.csproj", "{C51F9DC2-F053-45FD-94A4-E0E1EDD52E56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleManagement.Tests", "VehicleManagement.Tests\VehicleManagement.Tests.csproj", "{9E65EA40-9826-414B-B464-B8B4332A1759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagement.Tests", "VehicleManagement.Tests\VehicleManagement.Tests.csproj", "{9E65EA40-9826-414B-B464-B8B4332A1759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{FF6DA75C-2DB5-4B2A-84C8-C8F5FD5B11F5}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

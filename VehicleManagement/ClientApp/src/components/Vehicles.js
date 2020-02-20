@@ -1,7 +1,6 @@
 import React, { Component, useContext, useState, useEffect } from 'react';
 import { Button, Icon, List, Dropdown, Input } from 'semantic-ui-react';
 import { useHistory } from "react-router-dom";
-import { store } from '../store';
 
 export default function Vehicles() {
     const [vehicles, setVehicles] = useState([]);
