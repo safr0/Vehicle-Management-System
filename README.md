@@ -24,9 +24,9 @@ This project is based on React project template with ASP.NET Core (https://docs.
 1. ASPNET CORE 3.1 (MVC, C#)
 2. React boiler plate using Create React App (create-react-app)
 3. React semantic UI controls
-4. -React (hooks):
-    -a UseState
-    -b UseEffect
+4. React (hooks):    
+    - UseState
+    - UseEffect
 5. React Router ^5.x
 6. Fetch Api calls (Get, Post, Put)
 7. AutoMapper
